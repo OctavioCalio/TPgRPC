@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package task;
+
+service TaskAnalysisService {
+    rpc GetTaskAnalysis(GetTaskStatsRequest) returns (TGetTaskStatsResponse);
+    rpc CountLetters(GetLetterCountRequest) returns (TGetLetterCountResponse);
+
+}
+
+message GetTaskStatsRequest {}
+
+message TGetTaskStatsResponse {
+int32 total_tasks = 1;
+}
+
+message GetLetterCountRequest {}
+
+message TGetLetterCountResponse {
+ int32 total_letter_count = 1;
+}

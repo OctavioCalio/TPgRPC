@@ -1,0 +1,79 @@
+Dependencias:
+
+express
+@grpc/grpc-js
+@grpc/proto-loader
+mongoose (Base de datos mongoDB)
+dotenv
+
+--------------------------------------------------------------------
+
+Descripción general: 
+
+Sistema de gestión de tareas que cuenta con dos microservicios comunicados mediante
+gRPC. Uno microservicio se encarga de gestionar las tareas a través de una api rest
+y el otro proporciona análisis de las tareas mediante grpc; el conteo de tareas y
+el conteo de la cantidad de letras "a" entre todas las tareas guardadas.
+
+--------------------------------------------------------------------
+
+Estructura del Proyecto
+
+- API REST (Gestión de Tareas):
+
+Crear una tarea.
+Listar todas las tareas.
+Obtener estadísticas de las tareas a través de un endpoint adicional que se comunica con el servicio gRPC.
+
+- gRPC (Análisis de Tareas):
+
+Obtener el número total de tareas.
+Contar la cantidad de letras "a" en los títulos y descripciones de todas las tareas.
+Base de Datos: Utiliza MongoDB para almacenar las tareas.
+
+--------------------------------------------------------------------
+
+Endpoints de la API REST:
+
+--Crear una tarea
+
+URL: POST /tasks
+Descripción: Crea una nueva tarea.
+Body (JSON):
+{
+  "title": "Título de la tarea",
+  "description": "Descripción de la tarea"
+}
+
+--Listar todas las tareas: 
+
+URL: GET /tasks
+Descripción: Lista todas las tareas almacenadas en la base de datos.
+
+--Obtener estadísticas de tareas (gRPC)
+
+URL: GET /task/stats
+Descripción: Consulta al servicio gRPC para obtener el total de tareas almacenadas.
+Respuesta: 
+
+{
+  "total_tasks": 6
+}
+
+--Contar letras "a" en las tareas (gRPC)
+
+URL: GET /task/count
+Descripción: Consulta al servicio gRPC para contar la cantidad de letras "a" en los títulos y descripciones de todas las tareas.
+
+Respuesta esperada: 
+
+{
+  "total_letters": 12
+}
+
+
+--------------------------------------------------------------------
+
+El servidor gRPC tiene implementadas dos funcionalidades: 
+
+Obtener el número total de tareas (GetTaskAnalysis) y contar la cantidad de letras "a" en los títulos y descripciones de todas las tareas (CountLetters).
